@@ -14,7 +14,7 @@ const height = 1000;
 const width = 1000;
 
 // Draw background (a rectangle that fills the whole canvas)
-ctx.fillStyle = 'black';
+ctx.fillStyle = 'cyan';
 ctx.fillRect(0, 0, height, width);
 
 // Your code goes here!
@@ -36,35 +36,25 @@ ctx.fillStyle = 'black';
 //ctx.strokeRect(5,5, 200, 200);
 //ctx.beginPath();
 
-const outerRadius = Math.random() * 300;
-const factor = Math.ceil(Math.random() * 10);
+const outerRadius = 200;
+const factor = 4;
 const steps = 200;
 const offx = 500;
 const offy = 500;
-const innerRadiusMax = Math.random() * outerRadius;
-const innerRadiusMin = innerRadiusMax * Math.random();
-const innerRadiusStep = (innerRadiusMax - innerRadiusMin) / Math.ceil(Math.random() * 20);
-const angleOffset = Math.random() * 20;
-let iter = 0;
-for(let innerRadius = innerRadiusMin; innerRadius <= innerRadiusMax; innerRadius += innerRadiusStep){
+for(let innerRadius = 20; innerRadius <= 150; innerRadius += 10){
 
   ctx.beginPath();
-  ctx.strokeStyle = 'hsl(' + (innerRadius / 200) * 360 + ', 100%, 50%)'
-  let outerAngle =0;
-  let innerAngle = outerAngle * factor;
-  ctx.moveTo(Math.cos(outerAngle) * outerRadius + Math.cos(innerAngle) * innerRadius + offx, 
-             Math.sin(outerAngle) * outerRadius + Math.sin(innerAngle) * innerRadius + offy)
+  ctx.moveTo(offx + outerRadius + innerRadius, offy);
 
   for(let i = 1; i <= steps; i++){
     let outerAngle = 2 * Math.PI * (i / steps);
-    let innerAngle = outerAngle * factor;
+    let innerAngle =  -outerAngle * factor;
 
     ctx.lineTo(Math.cos(outerAngle) * outerRadius + Math.cos(innerAngle) * innerRadius + offx, 
                Math.sin(outerAngle) * outerRadius + Math.sin(innerAngle) * innerRadius + offy)
     
   }
   ctx.stroke();
-  iter++;
 }
 
 /*
